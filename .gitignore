@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.env
+
+# Streamlit logs
+.streamlit/
+*.log
+
+# Caches
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Orders database (optional, usually you don't commit databases/CSV data files unless initialized)
+# orders.csv
+
+# OS generated files
+.DS_Store
+Thumbs.db
