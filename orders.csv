@@ -4,3 +4,4 @@ order_id,customer_name,table_number,items,quantities,total_price,status,created_
 3,joo,23,"['Ice Cream', 'Croissant']","[1, 1]",6.0,Preparing,2026-03-14 10:40:45,
 4,joo,23,"['Ice Cream', 'Brownie', 'Gift Hamper']","[1, 1, 1]",7.5,Preparing,2026-03-14 10:40:57,
 5,joo,23,"['Mocha', 'Green Tea', 'Bagel', 'Cheesecake', 'Gift Hamper']","[1, 1, 1, 1, 1]",15.5,Ready,2026-03-14 10:44:42,
+6,shravya,1,"['Tiramisu', 'Bagel']","[1, 1]",8.25,Preparing,2026-03-14 11:01:42,
