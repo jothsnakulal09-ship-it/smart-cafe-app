@@ -1,0 +1,6 @@
+order_id,customer_name,table_number,items,quantities,total_price,status,created_at,feedback
+1,joo,23,"['Latte', 'Macchiato', 'Earl Grey']","[1, 1, 1]",11.75,Preparing,2026-03-14 10:40:04,
+2,joo,23,"['Tiramisu', 'Ice Cream', 'Cheesecake', 'Croissant']","[1, 1, 1, 1]",16.5,Preparing,2026-03-14 10:40:21,
+3,joo,23,"['Ice Cream', 'Croissant']","[1, 1]",6.0,Preparing,2026-03-14 10:40:45,
+4,joo,23,"['Ice Cream', 'Brownie', 'Gift Hamper']","[1, 1, 1]",7.5,Preparing,2026-03-14 10:40:57,
+5,joo,23,"['Mocha', 'Green Tea', 'Bagel', 'Cheesecake', 'Gift Hamper']","[1, 1, 1, 1, 1]",15.5,Ready,2026-03-14 10:44:42,
