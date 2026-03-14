@@ -3,6 +3,7 @@ import streamlit.components.v1 as components
 import pandas as pd
 import os
 import base64
+import requests
 from datetime import datetime
 import random
 
@@ -444,20 +445,38 @@ elif st.session_state.page == "Customer Order":
     # Chat Board
     st.markdown("---")
     st.subheader("💬 Smart Café Assistant")
-    with st.expander("Need help deciding or have questions? Chat with us!", expanded=False):
-        st.markdown(
-            """
-            <div style="text-align: center; padding: 1rem;">
-                <p>To provide you with the best experience and securely connect to our AI, our Smart Café Assistant opens in a new secure window!</p>
-                <a href="https://jothsnakulal09.app.n8n.cloud/webhook/a01fe0a2-5483-4edd-95fa-c3c2602114b1/chat" target="_blank" style="text-decoration: none;">
-                    <button style="background-color: #8B5E3C; color: white; padding: 10px 20px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; font-size: 1.1rem; transition: all 0.3s ease;">
-                        🤖 Open AI Chat Assistant
-                    </button>
-                </a>
-            </div>
-            """, 
-            unsafe_allow_html=True
-        )
+    with st.expander("Need help deciding or have questions? Chat with us!", expanded=True):
+        chat_container = st.container(height=350)
+        with chat_container:
+            for msg in st.session_state.chat_history:
+                with st.chat_message(msg["role"]):
+                    st.write(msg["content"])
+
+        user_input = st.chat_input("Ask anything about our menu, specials, or orders...")
+        if user_input:
+            st.session_state.chat_history.append({"role": "user", "content": user_input})
+            try:
+                response = requests.post(
+                    "https://jothsnakulal09.app.n8n.cloud/webhook/a01fe0a2-5483-4edd-95fa-c3c2602114b1/chat",
+                    json={"chatInput": user_input, "sessionId": st.session_state.get('customer_name', 'guest')},
+                    timeout=15
+                )
+                if response.status_code == 200:
+                    data = response.json()
+                    # Try common n8n response keys
+                    bot_reply = (
+                        data.get("output") or
+                        data.get("text") or
+                        data.get("message") or
+                        data.get("response") or
+                        str(data)
+                    )
+                else:
+                    bot_reply = f"Sorry, I couldn't connect right now. (Status: {response.status_code})"
+            except Exception as e:
+                bot_reply = "Sorry, I'm having trouble connecting. Please try again shortly!"
+            st.session_state.chat_history.append({"role": "assistant", "content": bot_reply})
+            st.rerun()
 
 elif st.session_state.page == "Order Status":
     st.markdown('<h1 class="main-header">Order Tracking</h1>', unsafe_allow_html=True)
