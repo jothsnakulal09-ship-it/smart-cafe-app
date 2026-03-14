@@ -283,7 +283,6 @@ if st.session_state.page == "Home":
     
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.markdown('<div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">', unsafe_allow_html=True)
         st.session_state.customer_name = st.text_input("👤 Your Name", value=st.session_state.customer_name)
         st.session_state.table_number = st.text_input("🪑 Table Number", value=st.session_state.table_number)
 
@@ -301,7 +300,6 @@ if st.session_state.page == "Home":
             else:
                 st.session_state.page = "Customer Order"
                 st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
 
 elif st.session_state.page == "Customer Order":
     st.markdown('<h1 class="main-header">Menu</h1>', unsafe_allow_html=True)
