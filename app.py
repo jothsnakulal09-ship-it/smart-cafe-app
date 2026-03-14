@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 import os
 import base64
@@ -11,6 +12,18 @@ st.set_page_config(
     page_icon="☕",
     layout="wide",
     initial_sidebar_state="expanded"
+)
+
+# JavaScript to auto-scroll to top when page changes
+components.html(
+    """
+    <script>
+        // Force scroll to top on load
+        window.parent.scrollTo(0, 0);
+    </script>
+    """,
+    height=0,
+    width=0,
 )
 
 st.markdown("""
