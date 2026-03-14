@@ -445,7 +445,19 @@ elif st.session_state.page == "Customer Order":
     st.markdown("---")
     st.subheader("💬 Smart Café Assistant")
     with st.expander("Need help deciding or have questions? Chat with us!", expanded=False):
-        components.iframe("https://jothsnakulal09.app.n8n.cloud/webhook/a01fe0a2-5483-4edd-95fa-c3c2602114b1/chat", height=500, scrolling=True)
+        st.markdown(
+            """
+            <div style="text-align: center; padding: 1rem;">
+                <p>To provide you with the best experience and securely connect to our AI, our Smart Café Assistant opens in a new secure window!</p>
+                <a href="https://jothsnakulal09.app.n8n.cloud/webhook/a01fe0a2-5483-4edd-95fa-c3c2602114b1/chat" target="_blank" style="text-decoration: none;">
+                    <button style="background-color: #8B5E3C; color: white; padding: 10px 20px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; font-size: 1.1rem; transition: all 0.3s ease;">
+                        🤖 Open AI Chat Assistant
+                    </button>
+                </a>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
 
 elif st.session_state.page == "Order Status":
     st.markdown('<h1 class="main-header">Order Tracking</h1>', unsafe_allow_html=True)
