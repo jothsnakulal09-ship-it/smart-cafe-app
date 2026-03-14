@@ -36,88 +36,102 @@ st.markdown("""
     }
 
     .main-header {
-        font-size: 2.5rem;
-        font-weight: bold;
+        font-size: 2.8rem;
+        font-weight: 900;
         color: #8B5E3C;
         text-align: center;
         margin-bottom: 2rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        animation: fadeInDown 0.8s ease-out;
     }
-    .menu-card {
-        background-color: #f8f9fa;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        border: 1px solid #e9ecef;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
-    .order-card {
-        background-color: #fff3cd;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        border: 1px solid #ffeaa7;
-    }
-    .status-preparing {
-        background-color: #fff3cd;
-        color: #856404;
-        padding: 0.25rem 0.5rem;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-    .status-ready {
-        background-color: #d1ecf1;
-        color: #0c5460;
-        padding: 0.25rem 0.5rem;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-    .status-completed {
-        background-color: #d4edda;
-        color: #155724;
-        padding: 0.25rem 0.5rem;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-    .sidebar-nav {
-        background-color: #f8f9fa;
-        padding: 1rem;
-        border-radius: 10px;
-    }
+
     .menu-card {
         position: relative;
-        background-color: #f8f9fa;
-        border-radius: 10px;
-        margin: 0.5rem 0;
-        border: 1px solid #e9ecef;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        background-color: #ffffff;
+        border-radius: 15px;
+        margin: 0.8rem 0;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         overflow: hidden;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
     }
+    
+    .menu-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 12px 25px rgba(139, 94, 60, 0.2);
+    }
+
     .menu-card img {
         width: 100%;
+        height: 200px;
+        object-fit: cover;
         display: block;
-        border-radius: 10px 10px 0 0;
+        border-radius: 15px 15px 0 0;
+        transition: transform 0.5s ease;
     }
+    
+    .menu-card:hover img {
+        transform: scale(1.05);
+    }
+
     .menu-card-overlay {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
-        background: rgba(0, 0, 0, 0.6);
+        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
         color: white;
-        padding: 0.5rem;
+        padding: 1.5rem 1rem 0.5rem 1rem;
         text-align: center;
+        backdrop-filter: blur(2px);
     }
+    
     .menu-card-overlay h4 {
         margin: 0;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     }
+    
     .menu-card-overlay p {
         margin: 0;
-        font-size: 0.9rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #FFD700;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     }
+    
+    /* Enhance ALL stButtons */
+    div[data-testid="stButton"] button {
+        border-radius: 20px !important;
+        font-weight: bold !important;
+        border: none !important;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+        transition: all 0.3s ease !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    div[data-testid="stButton"] button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15) !important;
+        background-color: #8B5E3C !important;
+        color: white !important;
+    }
+    
+    div[data-testid="stButton"] button:active {
+        transform: translateY(1px) !important;
+    }
+
     .add-btn-container {
-        padding: 0.5rem;
+        padding: 0.8rem;
         text-align: center;
+        background-color: #ffffff;
     }
 </style>
 """, unsafe_allow_html=True)
