@@ -203,6 +203,10 @@ if 'current_order_id' not in st.session_state:
     st.session_state.current_order_id = None
 if 'page' not in st.session_state:
     st.session_state.page = "Home"
+if 'chat_history' not in st.session_state:
+    st.session_state.chat_history = [
+        {"role": "assistant", "content": "👋 Hi there! I'm the Smart Café bot. How can I help you today?"}
+    ]
 
 def change_page(new_page):
     st.session_state.page = new_page
@@ -340,7 +344,7 @@ elif st.session_state.page == "Customer Order":
     st.subheader("⭐ Today's Special")
     col1, col2 = st.columns([1, 2])
     with col1:
-        st.image(TODAYS_SPECIAL["image"], use_column_width=True)
+        st.image(TODAYS_SPECIAL["image"], use_container_width=True)
     with col2:
         st.markdown(f"### {TODAYS_SPECIAL['name']}")
         st.markdown(f"**${TODAYS_SPECIAL['price']:.2f}**")
@@ -436,6 +440,34 @@ elif st.session_state.page == "Customer Order":
                 st.error(f"Order is not placed. Error: {e}")
     else:
         st.info("Your cart is empty. Add some items from the menu!")
+
+    # Chat Board
+    st.markdown("---")
+    st.subheader("💬 Smart Café Assistant")
+    with st.expander("Need help deciding or have questions? Chat with us!", expanded=False):
+        for msg in st.session_state.chat_history:
+            with st.chat_message(msg["role"]):
+                st.write(msg["content"])
+                
+        user_input = st.chat_input("Ask about our coffee, ingredients, or anything else...")
+        if user_input:
+            st.session_state.chat_history.append({"role": "user", "content": user_input})
+            
+            # Simple keyword-based bot responses
+            lower_input = user_input.lower()
+            if "vegan" in lower_input or "dairy free" in lower_input:
+                bot_reply = "We offer oat milk, almond milk, and soy milk substitutes for all our coffees for an additional $0.50!"
+            elif "wifi" in lower_input or "password" in lower_input:
+                bot_reply = "Our WiFi network is 'SmartCafe_Guest' and the password is 'FreshBeans2026'."
+            elif "sweet" in lower_input or "sugar" in lower_input:
+                bot_reply = "If you like sweet drinks, our Caramel Macchiato or Mocha are excellent choices! We can also adjust the syrup pumps to your liking."
+            elif "hello" in lower_input or "hi" in lower_input:
+                bot_reply = "Hello there! Let me know if you need recommendations from our menu today."
+            else:
+                bot_reply = "Thanks for your message! Our staff at the counter would be happy to help you with that right away. 😊"
+                
+            st.session_state.chat_history.append({"role": "assistant", "content": bot_reply})
+            st.rerun()
 
 elif st.session_state.page == "Order Status":
     st.markdown('<h1 class="main-header">Order Tracking</h1>', unsafe_allow_html=True)
