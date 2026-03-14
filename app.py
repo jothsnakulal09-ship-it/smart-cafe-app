@@ -400,10 +400,14 @@ elif st.session_state.page == "Customer Order":
                 st.session_state.current_order_id = order_id
                 st.session_state.order_placed = True
                 st.session_state.cart = []
-                st.success("Order placed successfully! Please wait while we prepare your order.")
+                st.success("Order placed successfully! Redirecting to tracking page...")
                 if includes_gift:
                     st.balloons()
                     st.success("🎁 A Free Gift Hamper has been added to your order!")
+                
+                # Automatically navigate to Order Status
+                st.session_state.page = "Order Status"
+                st.rerun()
             except Exception as e:
                 st.error(f"Order is not placed. Error: {e}")
     else:
