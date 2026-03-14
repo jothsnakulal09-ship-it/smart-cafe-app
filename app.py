@@ -397,13 +397,12 @@ elif st.session_state.page == "Customer Order":
 
                 st.session_state.current_order_id = order_id
                 st.session_state.order_placed = True
-                st.session_state.cart = []
-                st.success("Order placed successfully! Redirecting to tracking page...")
-                if includes_gift:
-                    st.balloons()
-                    st.success("🎁 A Free Gift Hamper has been added to your order!")
                 
-                # Automatically navigate to Order Status
+                if includes_gift:
+                    st.session_state.just_got_gift = True
+                
+                # Clear cart and navigate
+                st.session_state.cart = []
                 st.session_state.page = "Order Status"
                 st.rerun()
             except Exception as e:
@@ -414,6 +413,14 @@ elif st.session_state.page == "Customer Order":
 elif st.session_state.page == "Order Status":
     st.markdown('<h1 class="main-header">Order Tracking</h1>', unsafe_allow_html=True)
     st.markdown("Real-time updates on your delicious treats.")
+
+    if st.session_state.get('just_got_gift'):
+        st.balloons()
+        st.success("🎁 A Free Gift Hamper was added to your order as a thank you for your loyalty!")
+        st.session_state.just_got_gift = False
+    elif st.session_state.get('order_placed'):
+        st.success("Order placed successfully!")
+        st.session_state.order_placed = False
 
     if st.session_state.current_order_id:
         orders_df = load_orders()
